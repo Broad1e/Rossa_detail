@@ -1,11 +1,7 @@
 import ParallaxPhoto from './parallax-photo';
-
-const services = [
-  { id: 'detailing', number: '01', title: 'DETAILING', ru: 'Внимание к каждой детали', text: 'Уход за внешним видом и интерьером автомобиля. Обсудим состояние поверхностей и подберём подходящий состав работ.', tags: 'КУЗОВ / САЛОН / ДЕТАЛИ' },
-  { id: 'wrapping', number: '02', title: 'WRAPPING', ru: 'Новый характер', text: 'Оклейка автомобиля плёнкой. Цвет, фактуру и объём оклейки подбираем под вашу идею.', tags: 'ЦВЕТ / ФАКТУРА / ОБРАЗ' },
-  { id: 'painting', number: '03', title: 'PAINTING', ru: 'Цвет имеет значение', text: 'Покраска элементов автомобиля. Задача, оттенок и объём работ обсуждаются индивидуально.', tags: 'ОТТЕНОК / ПОВЕРХНОСТЬ / ДЕТАЛЬ' },
-  { id: 'protection', number: '04', title: 'PROTECTION', ru: 'Сохранить главное', text: 'Защита поверхностей автомобиля. Поможем определить зоны и подобрать решение под условия эксплуатации.', tags: 'ЗАЩИТА / УХОД / СОХРАННОСТЬ' },
-];
+import WorkGallery from './work-gallery';
+import { services, additionalDirections } from '../data/services';
+import { galleryPhotos } from '../data/gallery';
 
 function Brand({ className = '' }: { className?: string }) {
   return <span className={`brand ${className}`}>ROSSA.DETAIL</span>;
@@ -17,8 +13,8 @@ export default function Home() {
       <a className="skip" href="#main">Перейти к содержимому</a>
       <header className="header px-6 md:px-12">
         <a href="#" aria-label="ROSSA.DETAIL — в начало"><Brand /></a>
-        <nav className="desktop-nav" aria-label="Основная навигация"><a href="#services">Направления</a><a href="#approach">Подход</a><a href="#contact">Контакт <span aria-hidden="true">↗</span></a></nav>
-        <details className="mobile-nav"><summary>Меню</summary><nav aria-label="Мобильная навигация"><a href="#services">Направления</a><a href="#approach">Подход</a><a href="#contact">Контакт</a></nav></details>
+        <nav className="desktop-nav" aria-label="Основная навигация"><a href="#services">Направления</a><a href="#gallery">Галерея</a><a href="#approach">Подход</a><a href="#contact">Контакт <span aria-hidden="true">↗</span></a></nav>
+        <details className="mobile-nav"><summary>Меню</summary><nav aria-label="Мобильная навигация"><a href="#services">Направления</a><a href="#gallery">Галерея</a><a href="#approach">Подход</a><a href="#contact">Контакт</a></nav></details>
       </header>
       <main id="main">
         <section className="hero px-6 md:px-12" aria-labelledby="hero-title">
@@ -39,12 +35,21 @@ export default function Home() {
           <p className="reference-note">Визуальные референсы для первой версии, не работы студии. Фото: <a href="https://unsplash.com/photos/a-black-sports-car-parked-in-front-of-a-garage-JUiftQpriyo" target="_blank" rel="noopener noreferrer">Nejc Soklič</a> / <a href="https://unsplash.com/photos/a-black-car-parked-in-a-garage-s2unq_BAQjw" target="_blank" rel="noopener noreferrer">Jonathan Ikemura</a>, <a href="https://www.pexels.com/photo/a-person-polishing-the-black-car-5233259/" target="_blank" rel="noopener noreferrer">Khunkorn Laowisit</a>, <a href="https://unsplash.com/photos/close-up-of-a-modern-car-headlight-on-black-matte-surface-2uOS_cpo1vA" target="_blank" rel="noopener noreferrer">sumith ks</a>.</p>
         </section>
         <section id="services" className="services px-6 md:px-12" aria-labelledby="services-title">
-          <div className="section-top"><p className="eyebrow">01 / НАПРАВЛЕНИЯ</p><span className="muted">Четыре грани одного подхода</span></div>
+          <div className="section-top"><p className="eyebrow">01 / НАПРАВЛЕНИЯ</p><span className="muted">Пять граней одного подхода</span></div>
           <h2 id="services-title">Ваш автомобиль.<br /><span className="muted">Ваше выражение.</span></h2>
-          <div className="service-list">{services.map(service => <details className="service" key={service.id} id={service.id}><summary><span className="service-number">{service.number}</span><span className="service-title">{service.title}</span><span className="service-ru">{service.ru}</span><span className="plus" aria-hidden="true">+</span></summary><div className="service-body"><p>{service.text}</p><div><span className="eyebrow">{service.tags}</span><a href="#contact" className="text-link">Обсудить задачу ↗</a></div></div></details>)}</div>
+          <div className="service-list">{services.map(service => <details className="service" key={service.id} id={service.id}><summary><span className="service-number">{service.number}</span><span className="service-title">{service.title}</span><span className="service-ru">{service.ru}</span><span className="plus" aria-hidden="true">+</span></summary><div className="service-body"><ul className="service-items">{service.items.map(item => <li key={item}>{item}</li>)}</ul><div className="service-action"><a href="#contact" className="text-link">Обсудить задачу ↗</a></div></div></details>)}</div>
         </section>
-        <section id="approach" className="approach px-6 md:px-12" aria-labelledby="approach-title"><div><p className="eyebrow">02 / ПОДХОД</p><Brand className="approach-brand" /><p className="muted">FROM SPb. WITH ATTENTION.</p></div><div><h2 id="approach-title">Ничего лишнего.<br />Только то, что<br /><em>имеет значение.</em></h2><p className="approach-text">Мы начинаем с вашей идеи. Что хочется изменить, что сохранить, на чём сделать акцент. Из этого складывается решение для вашего автомобиля.</p><div className="approach-steps"><span>01 — Обсуждаем задачу</span><span>02 — Выбираем направление</span><span>03 — Согласовываем детали</span></div></div></section>
-        <section id="contact" className="contact px-6 md:px-12" aria-labelledby="contact-title"><p className="eyebrow">03 / НАЧНЁМ С ВАШЕЙ ИДЕИ</p><h2 id="contact-title">LET’S TALK<span aria-hidden="true">↗</span></h2><div className="contact-bottom"><p>Расскажите об автомобиле<br />и о том, каким вы хотите его видеть.</p><a className="button button-light" href="https://www.instagram.com/rossa.detail/" target="_blank" rel="noopener noreferrer" aria-label="Открыть профиль rossa.detail в Instagram в новой вкладке">@rossa.detail <span aria-hidden="true">↗</span></a></div></section>
+        <section className="additional-directions px-6 md:px-12" aria-labelledby="additional-title">
+          <div className="additional-intro"><p className="eyebrow">ДОПОЛНИТЕЛЬНЫЕ НАПРАВЛЕНИЯ</p><h2 id="additional-title">За пределами<br /><span className="muted">автомобиля.</span></h2></div>
+          <ul className="additional-list">{additionalDirections.map((direction, index) => <li key={direction}><span className="muted" aria-hidden="true">0{index + 1}</span><span>{direction}</span></li>)}</ul>
+        </section>
+        <section id="gallery" className="work-gallery px-6 md:px-12" aria-labelledby="gallery-title">
+          <div className="section-top"><p className="eyebrow">02 / ГАЛЕРЕЯ РАБОТ</p>{!galleryPhotos.length && <span className="muted">Готовим фотографии студии</span>}</div>
+          <h2 id="gallery-title">Работы.<br /><span className="muted">В деталях.</span></h2>
+          <WorkGallery photos={galleryPhotos} />
+        </section>
+        <section id="approach" className="approach px-6 md:px-12" aria-labelledby="approach-title"><div><p className="eyebrow">03 / ПОДХОД</p><Brand className="approach-brand" /><p className="muted">FROM SPb. WITH ATTENTION.</p></div><div><h2 id="approach-title">Ничего лишнего.<br />Только то, что<br /><em>имеет значение.</em></h2><p className="approach-text">Мы начинаем с вашей идеи. Что хочется изменить, что сохранить, на чём сделать акцент. Из этого складывается решение для вашего автомобиля.</p><div className="approach-steps"><span>01 — Обсуждаем задачу</span><span>02 — Выбираем направление</span><span>03 — Согласовываем детали</span></div></div></section>
+        <section id="contact" className="contact px-6 md:px-12" aria-labelledby="contact-title"><p className="eyebrow">04 / НАЧНЁМ С ВАШЕЙ ИДЕИ</p><h2 id="contact-title">LET’S TALK<span aria-hidden="true">↗</span></h2><div className="contact-bottom"><p>Расскажите об автомобиле<br />и о том, каким вы хотите его видеть.</p><a className="button button-light" href="https://www.instagram.com/rossa.detail/" target="_blank" rel="noopener noreferrer" aria-label="Открыть профиль rossa.detail в Instagram в новой вкладке">@rossa.detail <span aria-hidden="true">↗</span></a></div></section>
       </main>
       <footer className="footer px-6 md:px-12"><a href="#" aria-label="Вернуться в начало"><Brand /></a><span>САНКТ-ПЕТЕРБУРГ · EST. 2026</span><a href="#main">Наверх ↑</a></footer>
     </>
