@@ -21,7 +21,7 @@ export default function Home() {
           <ParallaxPhoto className="hero-photo" src="https://images.unsplash.com/photo-1716738703767-e277c57b2a90?auto=format&w=2600&q=85" alt="" position="50% 65%" fit="cover" mobileSrc="https://images.unsplash.com/photo-1716738703767-e277c57b2a90?auto=format&w=1400&q=85" eager speed={0.34} />
           <div className="hero-shade" aria-hidden="true" />
           <div className="hero-meta"><span><i aria-hidden="true" /> САНКТ-ПЕТЕРБУРГ</span><span>EST. 2026</span></div>
-          <div className="hero-center"><p className="eyebrow">THE ART OF AUTOMOTIVE CARE</p><h1 id="hero-title"><Brand /></h1><p className="hero-signature">DETAILING × WRAPPING<br />PAINTING × PROTECTION</p></div>
+          <div className="hero-center"><p className="eyebrow">THE ART OF AUTOMOTIVE CARE</p><h1 id="hero-title"><Brand /></h1><p className="hero-signature">DETAILING × WRAPPING<br />PAINTING × PROTECTION<br />RESTORATION</p></div>
           <div className="hero-bottom"><p>Характер — в деталях.<br /><span>Внимание — к вашему автомобилю.</span></p><a className="button" href="#services">Найти своё направление <span aria-hidden="true">↘</span></a></div>
           <span className="hero-line" aria-hidden="true" />
         </section>
